@@ -4,25 +4,28 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+addr2line = "0.21"
 ckbez = "0.202.0"
 ckb-hash = "0.202.0"
 ckb-mock-tx-types = "0.202.0"
-ckb-script = "0.202.0"
+ckb-script = { version = "0.202.0", default-features = false, features = ["flatmemory"] }
 ckb-types = "0.202.0"
-ckb-vm = "0.24"
-
-# [patch.crates-io]
-# ckb-chain-spec = { path = "/home/ubuntu/src/ckb/spec" }
-# ckb-error = { path = "/home/ubuntu/src/ckb/error" }
-# ckb-hash = { path = "/home/ubuntu/src/ckb/util/hash" }
-# ckb-script = { path = "/home/ubuntu/src/ckb/script" }
-# ckb-traits = { path = "/home/ubuntu/src/ckb/traits" }
-# ckb-types = { path = "/home/ubuntu/src/ckb/util/types" }
+ckb-vm = { version = "0.24", features = ["pprof"] }
+goblin = "0.4"
+serde_json = "*"
 
 [patch.crates-io]
-ckb-chain-spec = { git = "https://github.com/libraries/ckb", branch = "runner202" }
-ckb-error = { git = "https://github.com/libraries/ckb", branch = "runner202" }
-ckb-hash = { git = "https://github.com/libraries/ckb", branch = "runner202" }
-ckb-script = { git = "https://github.com/libraries/ckb", branch = "runner202" }
-ckb-traits = { git = "https://github.com/libraries/ckb", branch = "runner202" }
-ckb-types = { git = "https://github.com/libraries/ckb", branch = "runner202" }
+ckb-chain-spec = { path = "/home/ubuntu/src/ckb/spec" }
+ckb-error = { path = "/home/ubuntu/src/ckb/error" }
+ckb-hash = { path = "/home/ubuntu/src/ckb/util/hash" }
+ckb-script = { path = "/home/ubuntu/src/ckb/script", default-features = false, features = ["flatmemory"] }
+ckb-traits = { path = "/home/ubuntu/src/ckb/traits" }
+ckb-types = { path = "/home/ubuntu/src/ckb/util/types" }
+
+# [patch.crates-io]
+# ckb-chain-spec = { git = "https://github.com/libraries/ckb", branch = "runner202" }
+# ckb-error = { git = "https://github.com/libraries/ckb", branch = "runner202" }
+# ckb-hash = { git = "https://github.com/libraries/ckb", branch = "runner202" }
+# ckb-script = { git = "https://github.com/libraries/ckb", branch = "runner202" }
+# ckb-traits = { git = "https://github.com/libraries/ckb", branch = "runner202" }
+# ckb-types = { git = "https://github.com/libraries/ckb", branch = "runner202" }

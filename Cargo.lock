@@ -4,11 +4,26 @@ version = 4
 
 [[package]]
 name = "addr2line"
+version = "0.21.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8a30b2e23b9e17a9f90641c7ab1549cd9b44f296d3ccbf309d2863cfe398a0cb"
+dependencies = [
+ "cpp_demangle",
+ "fallible-iterator",
+ "gimli 0.28.1",
+ "memmap2",
+ "object 0.32.2",
+ "rustc-demangle",
+ "smallvec",
+]
+
+[[package]]
+name = "addr2line"
 version = "0.24.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "dfbe277e56a376000877090da837660b4427aad530e3028d44e0bffe4f89a1c1"
 dependencies = [
- "gimli",
+ "gimli 0.31.1",
 ]
 
 [[package]]
@@ -35,11 +50,11 @@ version = "0.3.75"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6806a6321ec58106fea15becdad98371e28d92ccbc7c8f1b3b6dd724fe8f1002"
 dependencies = [
- "addr2line",
+ "addr2line 0.24.2",
  "cfg-if",
  "libc",
  "miniz_oxide",
- "object",
+ "object 0.36.7",
  "rustc-demangle",
  "windows-targets",
 ]
@@ -163,7 +178,6 @@ checksum = "9555578bc9e57714c812a1f84e4fc5b4d21fcb063490c624de019f7464c91268"
 [[package]]
 name = "ckb-chain-spec"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#126e1c33c1ebedc2b188b5d4d00894fd6ed3ad3e"
 dependencies = [
  "cacache",
  "ckb-constant",
@@ -171,7 +185,7 @@ dependencies = [
  "ckb-dao-utils",
  "ckb-error",
  "ckb-hash",
- "ckb-jsonrpc-types 0.202.0 (git+https://github.com/libraries/ckb?branch=runner202)",
+ "ckb-jsonrpc-types 0.202.0",
  "ckb-logger",
  "ckb-pow",
  "ckb-rational",
@@ -185,7 +199,6 @@ dependencies = [
 [[package]]
 name = "ckb-channel"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#126e1c33c1ebedc2b188b5d4d00894fd6ed3ad3e"
 dependencies = [
  "crossbeam-channel",
 ]
@@ -193,12 +206,10 @@ dependencies = [
 [[package]]
 name = "ckb-constant"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#126e1c33c1ebedc2b188b5d4d00894fd6ed3ad3e"
 
 [[package]]
 name = "ckb-crypto"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#126e1c33c1ebedc2b188b5d4d00894fd6ed3ad3e"
 dependencies = [
  "ckb-fixed-hash",
  "faster-hex",
@@ -210,7 +221,6 @@ dependencies = [
 [[package]]
 name = "ckb-dao-utils"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#126e1c33c1ebedc2b188b5d4d00894fd6ed3ad3e"
 dependencies = [
  "byteorder",
  "ckb-error",
@@ -220,7 +230,6 @@ dependencies = [
 [[package]]
 name = "ckb-error"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#126e1c33c1ebedc2b188b5d4d00894fd6ed3ad3e"
 dependencies = [
  "anyhow",
  "ckb-occupied-capacity",
@@ -231,7 +240,6 @@ dependencies = [
 [[package]]
 name = "ckb-fixed-hash"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#126e1c33c1ebedc2b188b5d4d00894fd6ed3ad3e"
 dependencies = [
  "ckb-fixed-hash-core",
  "ckb-fixed-hash-macros",
@@ -240,7 +248,6 @@ dependencies = [
 [[package]]
 name = "ckb-fixed-hash-core"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#126e1c33c1ebedc2b188b5d4d00894fd6ed3ad3e"
 dependencies = [
  "ckb_schemars",
  "faster-hex",
@@ -251,7 +258,6 @@ dependencies = [
 [[package]]
 name = "ckb-fixed-hash-macros"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#126e1c33c1ebedc2b188b5d4d00894fd6ed3ad3e"
 dependencies = [
  "ckb-fixed-hash-core",
  "proc-macro2",
@@ -262,7 +268,6 @@ dependencies = [
 [[package]]
 name = "ckb-gen-types"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#126e1c33c1ebedc2b188b5d4d00894fd6ed3ad3e"
 dependencies = [
  "cfg-if",
  "ckb-error",
@@ -276,10 +281,20 @@ dependencies = [
 [[package]]
 name = "ckb-hash"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#126e1c33c1ebedc2b188b5d4d00894fd6ed3ad3e"
 dependencies = [
  "blake2b-ref",
  "blake2b-rs",
+]
+
+[[package]]
+name = "ckb-jsonrpc-types"
+version = "0.202.0"
+dependencies = [
+ "ckb-types",
+ "ckb_schemars",
+ "faster-hex",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]
@@ -296,21 +311,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "ckb-jsonrpc-types"
-version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#126e1c33c1ebedc2b188b5d4d00894fd6ed3ad3e"
-dependencies = [
- "ckb-types",
- "ckb_schemars",
- "faster-hex",
- "serde",
- "serde_json",
-]
-
-[[package]]
 name = "ckb-logger"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#126e1c33c1ebedc2b188b5d4d00894fd6ed3ad3e"
 dependencies = [
  "log",
 ]
@@ -339,7 +341,6 @@ dependencies = [
 [[package]]
 name = "ckb-occupied-capacity"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#126e1c33c1ebedc2b188b5d4d00894fd6ed3ad3e"
 dependencies = [
  "ckb-occupied-capacity-core",
  "ckb-occupied-capacity-macros",
@@ -348,7 +349,6 @@ dependencies = [
 [[package]]
 name = "ckb-occupied-capacity-core"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#126e1c33c1ebedc2b188b5d4d00894fd6ed3ad3e"
 dependencies = [
  "serde",
 ]
@@ -356,7 +356,6 @@ dependencies = [
 [[package]]
 name = "ckb-occupied-capacity-macros"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#126e1c33c1ebedc2b188b5d4d00894fd6ed3ad3e"
 dependencies = [
  "ckb-occupied-capacity-core",
  "quote",
@@ -366,7 +365,6 @@ dependencies = [
 [[package]]
 name = "ckb-pow"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#126e1c33c1ebedc2b188b5d4d00894fd6ed3ad3e"
 dependencies = [
  "byteorder",
  "ckb-hash",
@@ -379,7 +377,6 @@ dependencies = [
 [[package]]
 name = "ckb-rational"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#126e1c33c1ebedc2b188b5d4d00894fd6ed3ad3e"
 dependencies = [
  "numext-fixed-uint",
  "serde",
@@ -388,7 +385,6 @@ dependencies = [
 [[package]]
 name = "ckb-resource"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#126e1c33c1ebedc2b188b5d4d00894fd6ed3ad3e"
 dependencies = [
  "ckb-system-scripts",
  "ckb-types",
@@ -402,7 +398,6 @@ dependencies = [
 [[package]]
 name = "ckb-script"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#126e1c33c1ebedc2b188b5d4d00894fd6ed3ad3e"
 dependencies = [
  "byteorder",
  "ckb-chain-spec",
@@ -433,7 +428,6 @@ dependencies = [
 [[package]]
 name = "ckb-traits"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#126e1c33c1ebedc2b188b5d4d00894fd6ed3ad3e"
 dependencies = [
  "ckb-types",
 ]
@@ -441,7 +435,6 @@ dependencies = [
 [[package]]
 name = "ckb-types"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#126e1c33c1ebedc2b188b5d4d00894fd6ed3ad3e"
 dependencies = [
  "bit-vec",
  "bytes",
@@ -533,6 +526,15 @@ name = "convert_case"
 version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6245d59a3e82a7fc217c5828a6692dbc6dfb63a0c8c90495621f7b9d79704a0e"
+
+[[package]]
+name = "cpp_demangle"
+version = "0.4.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "96e58d342ad113c2b878f16d5d034c03be492ae460cdbc02b7f0f2284d310c7d"
+dependencies = [
+ "cfg-if",
+]
 
 [[package]]
 name = "cpufeatures"
@@ -654,6 +656,12 @@ dependencies = [
  "libc",
  "windows-sys",
 ]
+
+[[package]]
+name = "fallible-iterator"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2acce4a10f12dc2fb14a218589d4f1f62ef011b2d0cc4b3cb1bba8e94da14649"
 
 [[package]]
 name = "faster-hex"
@@ -808,6 +816,16 @@ dependencies = [
  "libc",
  "r-efi",
  "wasi 0.14.2+wasi-0.2.4",
+]
+
+[[package]]
+name = "gimli"
+version = "0.28.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4271d37baee1b8c7e4b708028c57d816cf9d2434acb33a549475f78c181f6253"
+dependencies = [
+ "fallible-iterator",
+ "stable_deref_trait",
 ]
 
 [[package]]
@@ -1031,6 +1049,17 @@ dependencies = [
 
 [[package]]
 name = "object"
+version = "0.32.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a6a622008b6e321afc04970976f62ee297fdbaa6f95318ca343e3eebb9648441"
+dependencies = [
+ "flate2",
+ "memchr",
+ "ruzstd",
+]
+
+[[package]]
+name = "object"
 version = "0.36.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "62948e14d923ea95ea2c7c86c71013138b66525b86bdc08d2dcc262bdb497b87"
@@ -1236,12 +1265,15 @@ dependencies = [
 name = "rs"
 version = "0.1.0"
 dependencies = [
+ "addr2line 0.21.0",
  "ckb-hash",
  "ckb-mock-tx-types",
  "ckb-script",
  "ckb-types",
  "ckb-vm",
  "ckbez",
+ "goblin 0.4.0",
+ "serde_json",
 ]
 
 [[package]]
@@ -1270,6 +1302,17 @@ dependencies = [
  "libc",
  "linux-raw-sys",
  "windows-sys",
+]
+
+[[package]]
+name = "ruzstd"
+version = "0.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "58c4eb8a81997cf040a091d1f7e1938aeab6749d3a0dfa73af43cdc32393483d"
+dependencies = [
+ "byteorder",
+ "derive_more 0.99.20",
+ "twox-hash",
 ]
 
 [[package]]
@@ -1428,6 +1471,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "04dc19736151f35336d325007ac991178d504a119863a2fcb3758cdb5e52c50d"
 
 [[package]]
+name = "smallvec"
+version = "1.15.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "67b1b7a3b5fe4f1376887184045fcf45c69e92af734b7aaddc05fb777b6fbd03"
+
+[[package]]
 name = "ssri"
 version = "9.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1443,6 +1492,18 @@ dependencies = [
  "thiserror",
  "xxhash-rust",
 ]
+
+[[package]]
+name = "stable_deref_trait"
+version = "1.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a8f112729512f8e442d81f95a8a7ddf2b7c6b8a1a6f509a95864142b30cab2d3"
+
+[[package]]
+name = "static_assertions"
+version = "1.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
 
 [[package]]
 name = "syn"
@@ -1540,6 +1601,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f4f7f0dd8d50a853a531c426359045b1998f04219d88799810762cd4ad314234"
 dependencies = [
  "serde",
+]
+
+[[package]]
+name = "twox-hash"
+version = "1.6.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "97fee6b57c6a41524a810daee9286c02d7752c4253064d0b05472833a438f675"
+dependencies = [
+ "cfg-if",
+ "static_assertions",
 ]
 
 [[package]]
