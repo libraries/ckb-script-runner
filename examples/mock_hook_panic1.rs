@@ -1,12 +1,8 @@
 use ckb_mock_tx_types::{MockTransaction, Resource};
-use ckb_script::ROOT_VM_ID;
-use ckb_script::types::{DebugPrinter, VmId};
+use ckb_script::types::DebugPrinter;
 use ckb_types::packed::Byte32;
 use ckb_vm::decoder::Decoder;
 use ckb_vm::{Bytes, DefaultMachineRunner, Error as VmError};
-use std::cell::RefCell;
-use std::collections::HashMap;
-use std::rc::Rc;
 
 #[derive(Clone, Default)]
 struct HookCount {
@@ -22,8 +18,6 @@ where
     }
 
     fn init_by_exec(&mut self, _: &M) {}
-
-    fn meld(&mut self, _: &mut Self) {}
 
     fn load_program(&mut self, _: &Bytes, _: impl ExactSizeIterator<Item = Result<Bytes, VmError>>) {}
 
@@ -61,25 +55,9 @@ fn main() {
     let mut scheduler =
         runner.get_scheduler_by_location("output".parse().unwrap(), 0, "type".parse().unwrap()).unwrap();
 
-    let mut records = HashMap::<VmId, Rc<RefCell<HookCount>>>::new();
     while !scheduler.terminated() {
-        if scheduler.consumed_cycles() != 0 {
-            let (id, vm) = scheduler.iterate_prepare_machine().unwrap();
-            if let Some(data) = records.get(&id) {
-                vm.hook = data.clone();
-            }
-        }
         let result = scheduler.iterate().unwrap();
-        if result.executed_vm == ROOT_VM_ID {
-            let hook = scheduler.peek(&result.executed_vm, |m| Ok(m.hook.clone()), |&_, &_| unreachable!()).unwrap();
-            records.insert(result.executed_vm, hook);
-        }
-        if result.executed_vm != ROOT_VM_ID && scheduler.state(&result.executed_vm).is_some() {
-            let hook = scheduler.peek(&result.executed_vm, |m| Ok(m.hook.clone()), |&_, &_| unreachable!()).unwrap();
-            records.insert(result.executed_vm, hook);
-        }
-    }
-    for k in 0..=16 {
-        println!("{:?} {:?}", k, records.get(&k).unwrap().borrow().sum);
+        // Will panic! called `Result::unwrap()` on an `Err` value: Unexpected("VM 1 does not exist!")
+        scheduler.peek(&result.executed_vm, |m| Ok(m.hook.clone()), |&_, &_| unreachable!()).unwrap();
     }
 }
