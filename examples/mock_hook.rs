@@ -1,8 +1,11 @@
 use ckb_mock_tx_types::{MockTransaction, Resource};
 use ckb_script::types::DebugPrinter;
+use ckb_script::types::VmId;
 use ckb_types::packed::Byte32;
 use ckb_vm::decoder::Decoder;
 use ckb_vm::{Bytes, DefaultMachineRunner, Error as VmError};
+use std::collections::HashMap;
+use std::sync::{Arc, Mutex};
 
 #[derive(Clone, Default)]
 struct HookCount {
@@ -19,9 +22,9 @@ where
 
     fn init_by_exec(&mut self, _: &M) {}
 
-    fn load_program(&mut self, _: &Bytes, _: impl ExactSizeIterator<Item = Result<Bytes, VmError>>) {}
+    fn load_program(&mut self, _: &M, _: &Bytes, _: impl ExactSizeIterator<Item = Result<Bytes, VmError>>) {}
 
-    fn step(&mut self, _: &mut Decoder, _: &mut M) -> Result<(), ckb_vm::Error> {
+    fn step(&mut self, _: &mut M, _: &mut Decoder) -> Result<(), ckb_vm::Error> {
         self.sum += 1;
         Ok(())
     }
@@ -55,11 +58,19 @@ fn main() {
     let mut scheduler =
         runner.get_scheduler_by_location("output".parse().unwrap(), 0, "type".parse().unwrap()).unwrap();
 
+    let mut record = HashMap::<VmId, Arc<Mutex<HookCount>>>::new();
     while !scheduler.terminated() {
-        let result = scheduler.iterate().unwrap();
-        let sum =
-            scheduler.peek(&result.executed_vm, |m| Ok(m.hook.lock().unwrap().sum), |&_, &_| Ok(u64::MAX)).unwrap();
-        println!("{} {}", result.executed_vm, sum);
-        assert!(sum != 0); // Why vm 0'sum is 0?
+        scheduler.boot_root_vm_if_needed().unwrap();
+        let currents = scheduler.iterate_prepare_machine().unwrap();
+        let hook = record.entry(currents.0).or_insert(Default::default());
+        currents.1.hook = hook.clone();
+        scheduler.iterate().unwrap();
+    }
+    let expect: Vec<u64> = vec![
+        3563545, 234481, 234481, 237034, 237109, 237109, 237109, 237109, 237109, 237109, 239724, 239724, 239724,
+        239724, 239724, 239724, 239724,
+    ];
+    for i in 0..=16 {
+        assert_eq!(record.get(&i).unwrap().lock().unwrap().sum, expect[i as usize]);
     }
 }

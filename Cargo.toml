@@ -14,18 +14,18 @@ ckb-vm = { version = "0.24", features = ["pprof"] }
 goblin = "0.4"
 serde_json = "*"
 
-# [patch.crates-io]
-# ckb-chain-spec = { path = "/home/ubuntu/src/ckb/spec" }
-# ckb-error = { path = "/home/ubuntu/src/ckb/error" }
-# ckb-hash = { path = "/home/ubuntu/src/ckb/util/hash" }
-# ckb-script = { path = "/home/ubuntu/src/ckb/script", default-features = false, features = ["flatmemory"] }
-# ckb-traits = { path = "/home/ubuntu/src/ckb/traits" }
-# ckb-types = { path = "/home/ubuntu/src/ckb/util/types" }
-
 [patch.crates-io]
-ckb-chain-spec = { git = "https://github.com/libraries/ckb", branch = "runner202" }
-ckb-error = { git = "https://github.com/libraries/ckb", branch = "runner202" }
-ckb-hash = { git = "https://github.com/libraries/ckb", branch = "runner202" }
-ckb-script = { git = "https://github.com/libraries/ckb", branch = "runner202" }
-ckb-traits = { git = "https://github.com/libraries/ckb", branch = "runner202" }
-ckb-types = { git = "https://github.com/libraries/ckb", branch = "runner202" }
+ckb-chain-spec = { path = "/home/ubuntu/src/ckb/spec" }
+ckb-error = { path = "/home/ubuntu/src/ckb/error" }
+ckb-hash = { path = "/home/ubuntu/src/ckb/util/hash" }
+ckb-script = { path = "/home/ubuntu/src/ckb/script", default-features = false, features = ["flatmemory"] }
+ckb-traits = { path = "/home/ubuntu/src/ckb/traits" }
+ckb-types = { path = "/home/ubuntu/src/ckb/util/types" }
+
+# [patch.crates-io]
+# ckb-chain-spec = { git = "https://github.com/libraries/ckb", branch = "runner202" }
+# ckb-error = { git = "https://github.com/libraries/ckb", branch = "runner202" }
+# ckb-hash = { git = "https://github.com/libraries/ckb", branch = "runner202" }
+# ckb-script = { git = "https://github.com/libraries/ckb", branch = "runner202" }
+# ckb-traits = { git = "https://github.com/libraries/ckb", branch = "runner202" }
+# ckb-types = { git = "https://github.com/libraries/ckb", branch = "runner202" }

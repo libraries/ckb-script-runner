@@ -178,7 +178,6 @@ checksum = "9555578bc9e57714c812a1f84e4fc5b4d21fcb063490c624de019f7464c91268"
 [[package]]
 name = "ckb-chain-spec"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#b260466444e99279d705fe1555a9793962d6d27b"
 dependencies = [
  "cacache",
  "ckb-constant",
@@ -186,7 +185,7 @@ dependencies = [
  "ckb-dao-utils",
  "ckb-error",
  "ckb-hash",
- "ckb-jsonrpc-types 0.202.0 (git+https://github.com/libraries/ckb?branch=runner202)",
+ "ckb-jsonrpc-types 0.202.0",
  "ckb-logger",
  "ckb-pow",
  "ckb-rational",
@@ -200,7 +199,6 @@ dependencies = [
 [[package]]
 name = "ckb-channel"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#b260466444e99279d705fe1555a9793962d6d27b"
 dependencies = [
  "crossbeam-channel",
 ]
@@ -208,12 +206,10 @@ dependencies = [
 [[package]]
 name = "ckb-constant"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#b260466444e99279d705fe1555a9793962d6d27b"
 
 [[package]]
 name = "ckb-crypto"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#b260466444e99279d705fe1555a9793962d6d27b"
 dependencies = [
  "ckb-fixed-hash",
  "faster-hex",
@@ -225,7 +221,6 @@ dependencies = [
 [[package]]
 name = "ckb-dao-utils"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#b260466444e99279d705fe1555a9793962d6d27b"
 dependencies = [
  "byteorder",
  "ckb-error",
@@ -235,7 +230,6 @@ dependencies = [
 [[package]]
 name = "ckb-error"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#b260466444e99279d705fe1555a9793962d6d27b"
 dependencies = [
  "anyhow",
  "ckb-occupied-capacity",
@@ -246,7 +240,6 @@ dependencies = [
 [[package]]
 name = "ckb-fixed-hash"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#b260466444e99279d705fe1555a9793962d6d27b"
 dependencies = [
  "ckb-fixed-hash-core",
  "ckb-fixed-hash-macros",
@@ -255,7 +248,6 @@ dependencies = [
 [[package]]
 name = "ckb-fixed-hash-core"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#b260466444e99279d705fe1555a9793962d6d27b"
 dependencies = [
  "ckb_schemars",
  "faster-hex",
@@ -266,7 +258,6 @@ dependencies = [
 [[package]]
 name = "ckb-fixed-hash-macros"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#b260466444e99279d705fe1555a9793962d6d27b"
 dependencies = [
  "ckb-fixed-hash-core",
  "proc-macro2",
@@ -277,7 +268,6 @@ dependencies = [
 [[package]]
 name = "ckb-gen-types"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#b260466444e99279d705fe1555a9793962d6d27b"
 dependencies = [
  "cfg-if",
  "ckb-error",
@@ -291,10 +281,20 @@ dependencies = [
 [[package]]
 name = "ckb-hash"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#b260466444e99279d705fe1555a9793962d6d27b"
 dependencies = [
  "blake2b-ref",
  "blake2b-rs",
+]
+
+[[package]]
+name = "ckb-jsonrpc-types"
+version = "0.202.0"
+dependencies = [
+ "ckb-types",
+ "ckb_schemars",
+ "faster-hex",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]
@@ -311,21 +311,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "ckb-jsonrpc-types"
-version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#b260466444e99279d705fe1555a9793962d6d27b"
-dependencies = [
- "ckb-types",
- "ckb_schemars",
- "faster-hex",
- "serde",
- "serde_json",
-]
-
-[[package]]
 name = "ckb-logger"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#b260466444e99279d705fe1555a9793962d6d27b"
 dependencies = [
  "log",
 ]
@@ -354,7 +341,6 @@ dependencies = [
 [[package]]
 name = "ckb-occupied-capacity"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#b260466444e99279d705fe1555a9793962d6d27b"
 dependencies = [
  "ckb-occupied-capacity-core",
  "ckb-occupied-capacity-macros",
@@ -363,7 +349,6 @@ dependencies = [
 [[package]]
 name = "ckb-occupied-capacity-core"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#b260466444e99279d705fe1555a9793962d6d27b"
 dependencies = [
  "serde",
 ]
@@ -371,7 +356,6 @@ dependencies = [
 [[package]]
 name = "ckb-occupied-capacity-macros"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#b260466444e99279d705fe1555a9793962d6d27b"
 dependencies = [
  "ckb-occupied-capacity-core",
  "quote",
@@ -381,7 +365,6 @@ dependencies = [
 [[package]]
 name = "ckb-pow"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#b260466444e99279d705fe1555a9793962d6d27b"
 dependencies = [
  "byteorder",
  "ckb-hash",
@@ -394,7 +377,6 @@ dependencies = [
 [[package]]
 name = "ckb-rational"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#b260466444e99279d705fe1555a9793962d6d27b"
 dependencies = [
  "numext-fixed-uint",
  "serde",
@@ -403,7 +385,6 @@ dependencies = [
 [[package]]
 name = "ckb-resource"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#b260466444e99279d705fe1555a9793962d6d27b"
 dependencies = [
  "ckb-system-scripts",
  "ckb-types",
@@ -417,7 +398,6 @@ dependencies = [
 [[package]]
 name = "ckb-script"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#b260466444e99279d705fe1555a9793962d6d27b"
 dependencies = [
  "byteorder",
  "ckb-chain-spec",
@@ -448,7 +428,6 @@ dependencies = [
 [[package]]
 name = "ckb-traits"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#b260466444e99279d705fe1555a9793962d6d27b"
 dependencies = [
  "ckb-types",
 ]
@@ -456,7 +435,6 @@ dependencies = [
 [[package]]
 name = "ckb-types"
 version = "0.202.0"
-source = "git+https://github.com/libraries/ckb?branch=runner202#b260466444e99279d705fe1555a9793962d6d27b"
 dependencies = [
  "bit-vec",
  "bytes",
