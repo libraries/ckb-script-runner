@@ -1,6 +1,5 @@
 use ckb_types::prelude::IntoTransactionView;
 use ckb_vm::Register;
-use ckbez::unittest::Resource;
 
 pub struct SyscallCurrentCycles {}
 
@@ -29,15 +28,8 @@ pub fn generate_ckb_syscalls_patch(
     vm_id: &ckb_script::types::VmId,
     sg_data: &ckb_script::types::SgData<ckbez::unittest::Resource>,
     vm_context: &ckb_script::types::VmContext<ckbez::unittest::Resource>,
-    _: &u8,
+    debug_printer: &ckb_script::types::DebugPrinter,
 ) -> Vec<Box<(dyn ckb_vm::Syscalls<<ckb_script::types::Machine as ckb_vm::DefaultMachineRunner>::Inner>)>> {
-    let debug_printer: ckb_script::types::DebugPrinter =
-        std::sync::Arc::new(|_: &ckb_types::packed::Byte32, message: &str| {
-            let message = message.trim_end_matches('\n');
-            if message != "" {
-                println!("{}", &format!("Script log: {}", message));
-            }
-        });
     let mut sys_patch = ckb_script::generate_ckb_syscalls(vm_id, sg_data, vm_context, &debug_printer);
     sys_patch.insert(0, Box::new(SyscallCurrentCycles::new()));
     return sys_patch;
@@ -55,13 +47,14 @@ fn main() {
     tx.raw.inputs.push(px.create_cell_input(&cell_meta_i));
     let tx_view = tx.pack().into_view();
 
-    let config: ckb_script::runner::Config<Resource, u8, ckb_script::types::Machine> = ckb_script::runner::Config {
-        max_cycles: 100_000_000,
-        syscall_generator: generate_ckb_syscalls_patch,
-        syscall_context: 0,
-        version: ckb_script::ScriptVersion::V2,
-    };
-    let runner = ckb_script::runner::Runner::new(tx_view, dl, config).unwrap();
-    let result = runner.verify_by_location("input".parse().unwrap(), 0, "lock".parse().unwrap());
-    println!("{:?}", result);
+    let config =
+        ckb_script::config::Config::devnet().as_builder().syscall_generator(generate_ckb_syscalls_patch).build();
+    let verify = config.transaction_scripts_verifier(tx_view, dl).unwrap();
+    let script_hash = ckb_types::packed::Byte32::new(cell_meta_i.cell_output.lock.hash());
+    assert_eq!(
+        verify.get_script_hash_by_location("input".parse().unwrap(), 0, "lock".parse().unwrap()).unwrap(),
+        script_hash,
+    );
+    let result = verify.verify_single("lock".parse().unwrap(), &script_hash, 70_000_000);
+    println!("verify_single {:?}", result);
 }

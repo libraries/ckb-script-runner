@@ -12,12 +12,9 @@ fn main() {
     tx.raw.inputs.push(px.create_cell_input(&cell_meta_i));
     let tx_view = tx.pack().into_view();
 
-    let runner = ckb_script::runner::Runner::new(tx_view, dl, ckb_script::runner::Config::default()).unwrap();
-    let result = runner.verify_by_hash(
-        ckb_script::ScriptGroupType::Lock,
-        &ckb_types::packed::Byte32::new(cell_meta_i.cell_output.lock.hash()),
-    );
-    println!("verify_by_hash {:?}", result);
-    let result = runner.verify_by_location("input".parse().unwrap(), 0, "lock".parse().unwrap());
-    println!("verify_by_location {:?}", result);
+    let config: ckb_script::config::Config<_, _, ckb_script::types::Machine> = ckb_script::config::Config::devnet();
+    let verify = config.transaction_scripts_verifier(tx_view, dl).unwrap();
+    let script_hash = ckb_types::packed::Byte32::new(cell_meta_i.cell_output.lock.hash());
+    let result = verify.verify_single("lock".parse().unwrap(), &script_hash, 70_000_000);
+    println!("verify_single {:?}", result);
 }
